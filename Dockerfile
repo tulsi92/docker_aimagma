@@ -15,7 +15,7 @@ RUN wget https://ctg.cncr.nl/software/MAGMA/prog/magma_v1.10.zip && \
 
 # Change user to root to make root directory and chown it to mamba user. Mamba env is not active here
 USER root
-RUN mkdir /magma &&
+RUN mkdir /magma && \
     cd /magma && \
     curl https://vu.data.surfsara.nl/index.php/s/lxDgt2dNdNr6DYt/download > magma.zip && \
     unzip magma.zip && \
