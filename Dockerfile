@@ -15,19 +15,14 @@ RUN wget https://ctg.cncr.nl/software/MAGMA/prog/magma_v1.10.zip && \
 
 # Change user to root to make root directory and chown it to mamba user. Mamba env is not active here
 USER root
-RUN mkdir /evaladmix && \
-    chown mambauser:mambauser /evaladmix
-# switch user back to mambauser
-USER mambauser
-# you must include the below arg to activate the env within the dockerfile
-ARG MAMBA_DOCKERFILE_ACTIVATE=1
-ARG CPLUS_INCLUDE_PATH=/opt/conda/include
-ARG C_INCLUDE_PATH=/opt/conda/include
-RUN git clone https://github.com/GenisGE/evalAdmix.git /evaladmix && \
-    cd /evaladmix && \
-    git checkout 89ba805 && \
-    make clean && \
-    make
+RUN mkdir /magma &&
+    cd /magma && \
+    curl https://vu.data.surfsara.nl/index.php/s/lxDgt2dNdNr6DYt/download > magma.zip && \
+    unzip magma.zip && \
+    rm magma.zip && \
+    chmod +x magma && \
+    chown -R mambauser:mambauser /magma
+
 # below is necessary for the env to work with shell sessions
-ENV PATH "$MAMBA_ROOT_PREFIX/bin:/evaladmix:$PATH"
-ENTRYPOINT ["/usr/local/bin/_entrypoint.sh", "/evaladmix/evalAdmix"]
+# ENV PATH "$MAMBA_ROOT_PREFIX/bin:/magma:$PATH"
+ENTRYPOINT ["/usr/local/bin/_entrypoint.sh", "/magma/magma"]
