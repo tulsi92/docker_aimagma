@@ -1,5 +1,5 @@
 # Newer version of micromamba with lots of features
-FROM mambaorg/micromamba:1.4.1
+FROM mambaorg/micromamba:1.5.8
 # Add MAGMA directory to env
 ENV PATH="/magma:${PATH}"
 # Copy env file. must be chowned to the micromamba user
