@@ -1,6 +1,8 @@
 # Newer version of micromamba with lots of features
 FROM mambaorg/micromamba:1.4.1
-# copy env file. must be chowned to the micromamba user
+# Add MAGMA directory to env
+ENV PATH="/magma:${PATH}"
+# Copy env file. must be chowned to the micromamba user
 COPY --chown=micromamba:micromamba R.yaml /tmp/env.yaml
 # Install the environment. This is done as the micromamba user so superuser commands will not work
 RUN micromamba install -y -n base -f /tmp/env.yaml && \
