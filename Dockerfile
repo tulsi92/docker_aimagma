@@ -11,7 +11,11 @@ RUN micromamba install -y -n base -f /tmp/env.yaml && \
 # Install MAGMA
 # Change user to root to make root directory and chown it to mamba user. Mamba env is not active here
 USER root
-RUN mkdir /magma && \
+RUN apt-get update && \
+    apt-get install --no-install-recommends -qy curl && \
+    apt-get clean && \
+    apt-get autoclean && \
+    mkdir /magma && \
     cd /magma && \
     curl https://vu.data.surfsara.nl/index.php/s/lxDgt2dNdNr6DYt/download > magma.zip && \
     unzip magma.zip && \
