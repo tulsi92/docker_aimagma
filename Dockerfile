@@ -1,7 +1,7 @@
 # Newer version of micromamba with lots of features
 FROM mambaorg/micromamba:1.5.8
 # Add MAGMA directory to env
-ENV PATH="/magma:${PATH}"
+ENV PATH="/magma:/opt/conda/bin:${PATH}"
 # Copy env file. must be chowned to the micromamba user
 COPY --chown=micromamba:micromamba R.yaml /tmp/env.yaml
 # Install the environment. This is done as the micromamba user so superuser commands will not work
@@ -24,5 +24,4 @@ RUN apt-get update && \
     chown -R mambauser:mambauser /magma
 
 # below is necessary for the env to work with shell sessions
-# ENV PATH "$MAMBA_ROOT_PREFIX/bin:/magma:$PATH"
 ENTRYPOINT ["/usr/local/bin/_entrypoint.sh", "/magma/magma"]
