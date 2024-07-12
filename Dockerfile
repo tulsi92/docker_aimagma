@@ -7,12 +7,6 @@ RUN micromamba install -y -n base -f /tmp/env.yaml && \
     micromamba clean --all --yes
 
 # Install MAGMA
-USER micromamba
-RUN wget https://ctg.cncr.nl/software/MAGMA/prog/magma_v1.10.zip && \
-    unzip magma_v1.10.zip -d /opt && \
-    rm magma_v1.10.zip && \
-    chmod +x /opt/magma
-
 # Change user to root to make root directory and chown it to mamba user. Mamba env is not active here
 USER root
 RUN mkdir /magma && \
