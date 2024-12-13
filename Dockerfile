@@ -1,7 +1,5 @@
 # Newer version of micromamba with lots of features
 FROM mambaorg/micromamba:1.5.8
-# Use a base image with R installed
-FROM rocker/r-ver:4.2.2  # You can adjust the R version as needed
 # Copy env file. must be chowned to the micromamba user
 COPY --chown=micromamba:micromamba R.yaml /tmp/env.yaml
 # Install the environment. This is done as the micromamba user so superuser commands will not work
